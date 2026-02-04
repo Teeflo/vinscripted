@@ -22,3 +22,6 @@ Thumbs.db
 # Temporary files
 *.log
 nul
+
+# Agents file
+AGENTS.md
