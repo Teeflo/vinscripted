@@ -1,0 +1,19 @@
+{
+  "name": "vinted-description-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Vinscripted Chrome Extension",
+  "main": "api/analyze.js",
+  "scripts": {
+    "start": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

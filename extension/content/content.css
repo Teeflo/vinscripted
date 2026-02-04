@@ -1,0 +1,382 @@
+/* Floating Button Styles - Modern & Minimal */
+.vdg-floating-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: #1a1a1a;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 99;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+  outline: none;
+}
+
+.vdg-floating-btn:hover {
+  background: #333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.vdg-floating-btn:active {
+  transform: scale(0.98);
+}
+
+.vdg-floating-btn.vdg-disabled {
+  background: #e5e5e5;
+  color: #999;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.vdg-floating-btn.vdg-loading {
+  background: #1a1a1a;
+  cursor: wait;
+}
+
+.vdg-btn-icon {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vdg-btn-text {
+  white-space: nowrap;
+}
+
+/* Spinner */
+.vdg-spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: vdg-spin 0.8s linear infinite;
+}
+
+@keyframes vdg-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Modal Styles */
+.vdg-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.vdg-modal-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vdg-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.vdg-modal-content {
+  position: relative;
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.vdg-modal-open .vdg-modal-content {
+  transform: scale(1) translateY(0);
+}
+
+/* Modal Header */
+.vdg-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.vdg-modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.vdg-close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.vdg-close-btn:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* Modal Body */
+.vdg-modal-body {
+  padding: 24px;
+}
+
+.vdg-section {
+  margin-bottom: 20px;
+}
+
+.vdg-section:last-child {
+  margin-bottom: 0;
+}
+
+.vdg-section h3 {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.vdg-description {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  resize: vertical;
+  background: #fafafa;
+}
+
+.vdg-description:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+}
+
+/* Tags */
+.vdg-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.vdg-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.vdg-tag-category {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.vdg-tag-condition {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+
+.vdg-tag-color {
+  background: #fce4ec;
+  color: #c2185b;
+}
+
+.vdg-tag-size {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.vdg-tag-brand {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.vdg-tag-material {
+  background: #e0f2f1;
+  color: #00796b;
+}
+
+/* Keywords */
+.vdg-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.vdg-keyword {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #666;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Modal Footer */
+.vdg-modal-footer {
+  display: flex;
+  gap: 10px;
+  padding: 20px 24px;
+  border-top: 1px solid #e0e0e0;
+  flex-wrap: wrap;
+}
+
+.vdg-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.vdg-btn:hover {
+  transform: translateY(-1px);
+}
+
+.vdg-btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.vdg-btn-primary:hover {
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.vdg-btn-secondary {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.vdg-btn-secondary:hover {
+  background: #e0e0e0;
+}
+
+/* Notification */
+.vdg-notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 1000001;
+  opacity: 0;
+  transition: all 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.vdg-notification-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.vdg-notification-success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.vdg-notification-error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.vdg-notification-warning {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.vdg-notification-info {
+  background: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .vdg-floating-btn {
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 18px;
+    font-size: 13px;
+  }
+  
+  .vdg-modal-content {
+    width: 95%;
+    margin: 10px;
+  }
+  
+  .vdg-modal-header,
+  .vdg-modal-body,
+  .vdg-modal-footer {
+    padding: 16px 20px;
+  }
+  
+  .vdg-modal-footer {
+    flex-direction: column;
+  }
+  
+  .vdg-btn {
+    width: 100%;
+  }
+}
