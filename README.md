@@ -1,201 +1,181 @@
 # Vinscripted
 
-Extension Chrome qui analyse automatiquement les photos d'une annonce Vinted et génère une description optimisée grâce à l'IA (Google Gemini Vision).
-
-## 🚀 Fonctionnalités
-
-- **Analyse automatique des images** : Détecte les caractéristiques de vos articles (catégorie, état, couleur, taille, marque, matière)
-- **Descriptions optimisées** : Génère des descriptions concises et engageantes pour maximiser vos ventes
-- **Multi-langues** : Supporte 8 langues (FR, EN, DE, ES, IT, NL, PL, PT)
-- **Intégration fluide** : Bouton flottant sur la page de création d'annonce Vinted
-- **Insertion automatique** : Insère la description directement dans le champ Vinted
-
-## 📁 Structure du projet
-
-```
-VintedDescription/
-├── extension/          # Extension Chrome
-│   ├── manifest.json   # Configuration Manifest V3
-│   ├── popup/          # Interface des paramètres
-│   ├── content/        # Script injecté sur Vinted
-│   ├── background/     # Service Worker
-│   └── icons/          # Icônes de l'extension
-└── backend/            # Backend Vercel
-    ├── api/
-    │   └── analyze.js  # Endpoint d'analyse
-    ├── vercel.json     # Configuration Vercel
-    └── package.json    # Dépendances
-```
-
-## 🛠️ Prérequis
-
-1. **Clé API Google Gemini**
-   - Rendez-vous sur [Google AI Studio](https://makersuite.google.com/app/apikey)
-   - Créez un projet Google Cloud si nécessaire
-   - Générez une clé API gratuite
-
-2. **Compte Vercel**
-   - Inscrivez-vous sur [vercel.com](https://vercel.com/signup)
-   - Installez Vercel CLI : `npm i -g vercel`
-
-3. **Chrome installé** pour tester l'extension
-
-## 📦 Installation
-
-### 1. Backend Vercel
-
-```bash
-cd backend
-
-# Installer les dépendances
-npm install
-
-# Configurer les variables d'environnement
-cp .env.example .env
-# Éditez .env et ajoutez votre GEMINI_API_KEY
-
-# Déployer sur Vercel
-vercel login
-vercel
-
-# Définir la variable d'environnement sur Vercel
-vercel env add GEMINI_API_KEY
-
-# Déployer en production
-vercel --prod
-```
-
-Notez l'URL de votre backend (ex: `https://votre-backend.vercel.app`)
-
-### 2. Extension Chrome
-
-```bash
-# Créer les icônes (placez des PNG 16x16, 32x32, 48x48, 128x128 dans extension/icons/)
-# Vous pouvez générer des icônes simples sur https://www.flaticon.com/
-
-# Ouvrir Chrome et charger l'extension :
-# 1. Ouvrir chrome://extensions/
-# 2. Activer "Mode développeur" (toggle en haut à droite)
-# 3. Cliquer sur "Charger l'extension non empaquetée"
-# 4. Sélectionner le dossier 'extension/'
-```
-
-### 3. Configuration de l'Extension
-
-1. Cliquez sur l'icône de l'extension dans Chrome
-2. Configurez :
-   - **Langue** : Choisissez la langue des descriptions
-   - **URL du backend** : Collez l'URL de votre backend Vercel
-3. Cliquez sur "Sauvegarder"
-
-## 🎯 Utilisation
-
-1. **Allez sur Vinted** et créez une nouvelle annonce
-2. **Ajoutez vos photos** de l'article
-3. **Cliquez sur le bouton flottant** "✨ Générer la description"
-4. **Attendez l'analyse** (2-5 secondes)
-5. **Reviewez les résultats** :
-   - Description générée
-   - Attributs détectés (catégorie, état, etc.)
-   - Mots-clés SEO suggérés
-6. **Cliquez sur "Insérer"** pour ajouter automatiquement la description
-
-## 🌍 Langues supportées
-
-| Code | Langue |
-|------|--------|
-| `fr` | Français |
-| `en` | English |
-| `de` | Deutsch |
-| `es` | Español |
-| `it` | Italiano |
-| `nl` | Nederlands |
-| `pl` | Polski |
-| `pt` | Português |
-
-## ⚙️ Configuration avancée
-
-### Variables d'environnement Backend
-
-```env
-GEMINI_API_KEY=votre_clé_api_gemini
-```
-
-### Limiter les origines CORS (production)
-
-Modifiez `backend/api/analyze.js` :
-
-```javascript
-const ALLOWED_ORIGINS = [
-  'https://www.vinted.fr',
-  'https://www.vinted.be',
-  // ... autres domaines
-];
-```
-
-## 🔒 Sécurité
-
-- Aucune image n'est stockée sur le serveur
-- Les images sont traitées en mémoire uniquement
-- Clé API stockée côté serveur uniquement
-- Rate limiting : 10 requêtes/minute par IP
-- Pas de tracking utilisateur
-
-## 🐛 Dépannage
-
-### L'extension ne s'affiche pas sur Vinted
-- Vérifiez que vous êtes sur une URL `/items/new` ou `/member/items/new`
-- Rafraîchissez la page
-
-### "Erreur de connexion"
-- Vérifiez l'URL du backend dans les paramètres de l'extension
-- Assurez-vous que le backend Vercel est bien déployé
-
-### "Service temporairement indisponible"
-- L'API Gemini peut être surchargée, réessayez dans quelques instants
-- Vérifiez votre quota d'utilisation sur Google Cloud Console
-
-## 📝 Prompt Gemini utilisé
-
-Le backend envoie ce prompt optimisé à Gemini Vision :
-
-```
-Tu es un expert en vente sur Vinted. Analyse les images fournies et génère 
-une description d'annonce parfaite.
-
-RÈGLES :
-1. Sois concis mais descriptif (150-300 caractères)
-2. Mentionne l'état réel de l'article
-3. Décris les caractéristiques visibles
-4. Mentionne honnêtement les défauts éventuels
-5. Utilise un ton chaleureux et vendeur
-6. N'invente pas de marque si elle n'est pas visible
-
-FORMAT JSON :
-{
-  "description": "...",
-  "attributes": {
-    "category": "...",
-    "condition": "...",
-    "color": "...",
-    "size": "...",
-    "brand": "...",
-    "material": "..."
-  },
-  "keywords": ["..."]
-}
-```
-
-## 📄 Licence
-
-MIT License - Libre d'utilisation et de modification
-
-## 🙏 Crédits
-
-- [Google Gemini API](https://ai.google.dev/)
-- [Vercel](https://vercel.com/)
-- [Chrome Extensions](https://developer.chrome.com/docs/extensions/)
+<div align="center">
+  <img src="extension/icons/icon128.png" alt="Vinscripted Logo" width="100" height="100">
+  <br>
+  <strong>Extension Chrome pour générer automatiquement des descriptions optimisées pour vos annonces Vinted</strong>
+  <br>
+  <br>
+  <a href="#-description-français">Français</a> •
+  <a href="#-description">English</a> •
+  <a href="#-installation">Installation</a> •
+  <a href="#-utilisation">Utilisation</a> •
+  <a href="#-développement">Développement</a>
+</div>
 
 ---
 
-**Note** : Cette extension n'est pas affiliée à Vinted. Utilisez-la conformément aux Conditions d'Utilisation de Vinted.
+## 🇫🇷 Description (Français)
+
+Vinscripted est une extension Chrome qui utilise l'intelligence artificielle (Google Gemini) pour analyser vos photos d'articles et générer automatiquement des descriptions attrayantes et optimisées pour vos annonces Vinted.
+
+### ✨ Fonctionnalités
+
+- 🤖 **IA Générative** - Utilise Google Gemini pour analyser vos images et créer des descriptions
+- 🌍 **8 Langues supportées** - Français, Anglais, Allemand, Espagnol, Italien, Néerlandais, Polonais, Portugais
+- 📝 **Descriptions optimisées** - Titres accrocheurs et descriptions détaillées qui maximisent les ventes
+- 🔒 **Respect de la vie privée** - Aucune donnée personnelle n'est stockée
+- 🚀 **Intégration native** - S'intègre directement sur les pages d'ajout/modification d'annonces Vinted
+
+---
+
+## 🇬🇧 Description (English)
+
+Vinscripted is a Chrome extension that uses artificial intelligence (Google Gemini) to analyze your item photos and automatically generate attractive, optimized descriptions for your Vinted listings.
+
+### ✨ Features
+
+- 🤖 **Generative AI** - Uses Google Gemini to analyze images and create descriptions
+- 🌍 **8 Supported Languages** - French, English, German, Spanish, Italian, Dutch, Polish, Portuguese
+- 📝 **Optimized Descriptions** - Catchy titles and detailed descriptions that maximize sales
+- 🔒 **Privacy Focused** - No personal data is stored
+- 🚀 **Native Integration** - Integrates directly on Vinted item add/edit pages
+
+---
+
+## 📦 Installation
+
+### Extension Chrome
+
+1. Téléchargez le fichier `extension/vinscripted_v1.0.0.zip` depuis ce repository
+2. Décompressez le fichier ZIP dans un dossier
+3. Ouvrez Chrome et accédez à `chrome://extensions/`
+4. Activez le **Mode développeur** (coin supérieur droit)
+5. Cliquez sur **"Charger l'extension non empaquetée"**
+6. Sélectionnez le dossier `extension/` décompressé
+7. L'extension est installée ! 🎉
+
+### Backend (Optionnel - Pour développement)
+
+Le backend est déjà déployé et fonctionnel. Si vous souhaitez héberger votre propre backend :
+
+```bash
+cd backend
+npm install
+```
+
+Créez un fichier `.env` avec vos clés API :
+
+```env
+GEMINI_API_KEY=votre_clé_gemini
+VINSCRIPTED_API_KEY=votre_clé_extension
+```
+
+Déployez sur Vercel :
+
+```bash
+npm run deploy
+```
+
+---
+
+## 🚀 Utilisation
+
+1. **Accédez à Vinted** - Allez sur la page d'ajout ou de modification d'un article (`/items/new` ou `/items/ID/edit`)
+2. **Ajoutez vos photos** - Téléchargez les photos de votre article
+3. **Cliquez sur le bouton Vinscripted** - Un bouton flottant violet apparaîtra en haut à droite
+4. **Configurez** - Choisissez la langue et le style de description
+5. **Générez** - Cliquez sur "Générer la description" et laissez l'IA faire le reste !
+6. **Appliquez** - La description générée remplira automatiquement les champs de votre annonce
+
+---
+
+## 🛠️ Développement
+
+### Structure du projet
+
+```
+vinscripted/
+├── extension/                    # Extension Chrome (Manifest V3)
+│   ├── manifest.json            # Configuration de l'extension
+│   ├── content/                 # Content script (injecté sur Vinted)
+│   │   ├── content.js
+│   │   └── content.css
+│   ├── popup/                   # Popup des paramètres
+│   │   ├── popup.html
+│   │   ├── popup.css
+│   │   └── popup.js
+│   ├── background/              # Service Worker
+│   │   └── service-worker.js
+│   └── icons/                   # Icônes de l'extension
+│
+└── backend/                      # Backend Vercel Serverless
+    ├── api/
+    │   └── analyze.js           # Endpoint POST /api/analyze
+    ├── package.json
+    └── vercel.json
+```
+
+### Technologies utilisées
+
+- **Extension** : JavaScript vanilla, CSS, Manifest V3
+- **Backend** : Node.js 18+, Vercel Serverless Functions
+- **IA** : Google Gemini API (gemma-3-27b-it)
+
+### Scripts disponibles
+
+**Backend :**
+```bash
+cd backend
+npm start        # Développement local (vercel dev)
+npm run deploy   # Déploiement production
+```
+
+**Extension :**
+- Aucune étape de build requise
+- Modifiez les fichiers directement
+- Rechargez l'extension dans `chrome://extensions/`
+
+---
+
+## 🔒 Sécurité & Confidentialité
+
+- **Aucune donnée personnelle** n'est collectée ni stockée
+- Les images sont transmises de manière sécurisée à l'API Gemini
+- Les clés API sont protégées côté backend
+- Politique de confidentialité disponible dans `extension/PRIVACY_POLICY.md`
+
+---
+
+## 🌐 Sites supportés
+
+L'extension fonctionne sur tous les domaines Vinted :
+
+- 🇫🇷 www.vinted.fr
+- 🇧🇪 www.vinted.be
+- 🇪🇸 www.vinted.es
+- 🇩🇪 www.vinted.de
+- 🇮🇹 www.vinted.it
+- 🇳🇱 www.vinted.nl
+- 🇵🇱 www.vinted.pl
+- 🇵🇹 www.vinted.pt
+- 🇬🇧 www.vinted.co.uk
+- 🌐 www.vinted.com
+
+---
+
+## 📝 Licence
+
+Ce projet est sous licence privée. Tous droits réservés.
+
+---
+
+## 🤝 Support
+
+Pour toute question ou suggestion, n'hésitez pas à ouvrir une issue sur ce repository.
+
+---
+
+<div align="center">
+  <strong>Fait avec ❤️ pour les vendeurs Vinted</strong>
+</div>
