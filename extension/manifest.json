@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Vinscripted",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Génère automatiquement des descriptions optimisées pour vos annonces Vinted",
   "permissions": [
     "storage",
@@ -67,8 +67,12 @@
         "https://www.vinted.com/member/items/new*",
         "https://www.vinted.com/items/*/edit*"
       ],
-      "js": ["content/content.js"],
-      "css": ["content/content.css"],
+      "js": [
+        "content/content.js"
+      ],
+      "css": [
+        "content/content.css"
+      ],
       "run_at": "document_idle"
     }
   ],
@@ -83,7 +87,9 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["icons/*"],
+      "resources": [
+        "icons/*"
+      ],
       "matches": [
         "https://www.vinted.fr/*",
         "https://www.vinted.be/*",
