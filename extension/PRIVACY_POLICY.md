@@ -12,8 +12,7 @@ Vinscripted does **not** collect, store, or share any personal information.
 ## 2. Permissions
 The extension requires the following permissions to function:
 - `storage`: To save your preferred language and backend URL settings locally on your device.
-- `activeTab` & `host_permissions`: To detect when you are on a Vinted listing page and to inject the AI assistance button.
-- `scripting`: To read the images from the page and insert the generated description.
+- `host_permissions`: To interact with Vinted listing pages (detecting the page, reading images for analysis, and inserting the generated description).
 
 ## 3. Third-Party Services
 We use the **Google Gemini API** to analyze images and generate descriptions. Your data is subject to Google's Privacy Policy and AI terms of service only during the transient processing phase.

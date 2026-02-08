@@ -4,8 +4,7 @@
   "version": "1.0.1",
   "description": "Génère automatiquement des descriptions optimisées pour vos annonces Vinted",
   "permissions": [
-    "storage",
-    "activeTab"
+    "storage"
   ],
   "host_permissions": [
     "https://www.vinted.fr/*",
