@@ -54,7 +54,7 @@ L'extension s'adapte automatiquement à votre langue Vinted et génère des desc
 ✅ Bouton flottant discret et intuitif
 ✅ Interface en 8 langues
 ✅ Génération en quelques secondes
-✅ Compatible avec toutes les versions Vinted (.fr, .be, .es, .de, .it, .nl, .pl, .pt, .co.uk, .com)
+✅ Compatible avec toutes les plateformes Vinted en Europe et à l'international
 ✅ Aucune configuration requise - installation et utilisation immédiate
 
 💡 **Conseils d'utilisation**
@@ -77,13 +77,11 @@ Si Vinscripted vous fait gagner du temps et vous aide à vendre, n'hésitez pas 
 
 **Vinscripted n'est pas affilié à Vinted. C'est un outil indépendant créé pour aider les vendeurs.**
 
-## CATÉGORIES SUGGÉRÉES
-- Shopping
-- Productivité
-- Outils pour les entreprises
-
-## MOTS-CLÉS (max 30)
-vinted, description, ia, intelligence artificielle, vendeur, annonce, marketplace, mode, vêtements, seconde main, occasion, génération texte, automatique, ai, seller, listing, e-commerce
+<!-- 
+IMPORTANT : 
+- Ne copiez PAS les sections ci-dessous dans la description du Chrome Web Store.
+- Sélectionnez les catégories directement dans l'interface : Shopping, Productivité.
+-->
 
 ## ICÔNES REQUISES
 - 128x128 (obligatoire)
