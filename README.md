@@ -5,7 +5,7 @@
 <h1 align="center">Vinscripted</h1>
 
 <p align="center">
-  <strong>AI-powered product description generator for Vinted sellers</strong>
+  <strong>Améliorez votre expérience Vinted. Une extension tout-en-un pour automatiser les tâches répétitives, optimiser vos recherches et booster vos ventes grâce à des outils de scripting intelligents.</strong>
 </p>
 
 <p align="center">
